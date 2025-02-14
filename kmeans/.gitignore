@@ -1,0 +1,16 @@
+# ignore all files
+*
+# unignore all files with exetension
+!*.*
+# unignore all directories
+!*/
+!makefile
+## actual gitignore
+lib
+*.data
+*.c
+*.actual
+*.expected
+
+#vscode
+.vscode
