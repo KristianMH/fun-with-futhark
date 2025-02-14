@@ -1,0 +1,15 @@
+# ignore all files
+*
+# unignore all files with exetension
+!*.*
+# unignore all directories
+!*/
+
+## actual gitignore
+
+data
+lib
+*.c
+*.actual
+*.expected
+
