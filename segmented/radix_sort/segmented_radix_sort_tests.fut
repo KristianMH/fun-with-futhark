@@ -43,3 +43,9 @@ entry test_segmented_radix_sort_5 = wrapper_i32
 -- input { [100, 100, 100] [1, 1, 1]}
 -- output {[1, 1, 1]}
 entry test_segmented_radix_sort_6 = wrapper_i32
+
+-- ==
+-- entry: test_segmented_radix_sort_7
+-- input { [1, 1, 1] [14324, 432, 4532]}
+-- output {[14324, 432, 4532]}
+entry test_segmented_radix_sort_7 = wrapper_i32
