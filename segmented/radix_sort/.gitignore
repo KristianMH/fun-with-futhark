@@ -4,7 +4,8 @@
 !*.*
 # unignore all directories
 !*/
-
+#unignore makefile
+!makefile
 ## actual gitignore
 
 data

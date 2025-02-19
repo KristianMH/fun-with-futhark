@@ -2,7 +2,6 @@ import "lib/github.com/diku-dk/segmented/segmented"
 import "lib/github.com/diku-dk/cpprandom/random"
 import "lib/github.com/diku-dk/cpprandom/shuffle"
 
-
 -- module dist = uniform_int_distribution i32 minstd_rand
 
 -- can also be implemented with branching function!
@@ -13,11 +12,11 @@ def exclusive_scan 'a [n] (op: a -> a -> a) (ne: a) (as: [n]a) : [n]a =
 
 -- makes segmented flag array from shape array
 def mkFlagArray 't [m]
-                (shp: [m]i32)
+                (shp: [m]i64)
                 (zero: t)
                 (flag_val: t)
                 (r: i64) : [r]t =
-  let shp_ind = exclusive_scan (+) 0 shp |> map i64.i32
+  let shp_ind = exclusive_scan (+) 0 shp
   let vals = replicate m flag_val
   in scatter (replicate r zero) shp_ind vals
 
@@ -48,16 +47,17 @@ def segmented_reduce [n] 't
 def replicated_iota [n] (flags: [n]bool) : [n]i32 =
   map i32.bool flags |> scan (+) 0 |> map (\x -> x - 1)
 
-
-local module d = uniform_int_distribution i32 minstd_rand
+local module d = uniform_int_distribution i64 minstd_rand
 local module shuffe = mk_shuffle pcg32
+
 -- | random_segments: Generates a random array of segments which sums to len
 -- to be discussed. gives a decreasing sequence of segments.
-def random_segments (len : i32) (seed : i32) : []i32 =
+def random_segments (len: i64) (seed: i32) : []i64 =
   let rng = minstd_rand.rng_from_seed [seed]
   let shuffle_rng = pcg32.rng_from_seed [seed]
-  let (result, _, _) = 
-    loop (result, remainding, rng1) = ([], len, rng) while remainding > 0 do 
+  let (result, _, _) =
+    loop (result, remainding, rng1) = ([], len, rng)
+    while remainding > 0 do
       let (rng1, x) = d.rand (1, remainding) rng1
       in (result ++ [x], remainding - x, rng1)
   in (shuffe.shuffle shuffle_rng result).1
