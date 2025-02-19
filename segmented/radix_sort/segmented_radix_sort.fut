@@ -11,8 +11,6 @@ local
 def radix_sort_step [n] 't
                     (get_bit: i32 -> t -> i32)
                     (digit_n: i32)
-                    --  (segment_offsets: [k]i64)
-                    --  (segment_idxs: [n]i32)
                     (segment_offsets: [n]i64)
                     -- [n]index of last entry within each segment
                     (segment_last_entries: [n]i64)
