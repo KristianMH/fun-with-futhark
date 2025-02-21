@@ -4,17 +4,17 @@ FUTHARK := $(shell command -v futhark 2> /dev/null)
 # Default target
 all: install
 
-# Install target - compile knn.fut
+# Install target - compile kmeans.fut
 install:
 ifndef FUTHARK
 	$(error "futhark compiler not found. Please install futhark first.")
 endif
-	futhark opencl knn.fut -o knn
-	@echo "Compilation complete. Binary created as 'knn'"
+	futhark opencl kmeans.fut -o kmeans
+	@echo "Compilation complete. Binary created as 'kmeans'"
 
 # Clean target
 clean:
-	rm -f knn
+	rm -f kmeans
 	rm -f *.c
 	rm -f *.h
 	rm -f *.o
